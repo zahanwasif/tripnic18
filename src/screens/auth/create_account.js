@@ -32,7 +32,7 @@ const CustomePicker = (props)=>{
         
       >
         {props.options.map((item,index)=>(
-          <Picker.Item disabled label={item} value={item} key={index} />
+          <Picker.Item label={item} value={item} key={index} />
         ))}
         
       </Picker>
