@@ -16,133 +16,42 @@ const AddTrip = ({visible,close})=>{
         "lahore",
         "Karachi",
         "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "IslamabadIslamabadIslamabadIslamabadIslamabadIslamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
         
     ])
     return(
             <Modal visible={visible} animated animationType="fade" onRequestClose={()=>{close()}} > 
                 
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{alignItems:"center",justifyContent:"flex-start"}} >    
-                <ImageBackground style={{width:width,height:200}} source={{uri:src}} >
-                    <Icon 
-                        style={{paddingLeft:15,paddingTop:15}} 
-                        name="ios-close-circle" 
-                        size={30} 
-                        color="white" 
-                        onPress={()=>close()}
-                    />
-                </ImageBackground>    
+                    
+                    <ImageBackground style={{width:width,height:200}} source={{uri:src}} >
+                        <Icon 
+                            style={{paddingLeft:15,paddingTop:15}} 
+                            name="ios-close-circle" 
+                            size={30} 
+                            color="white" 
+                            onPress={()=>close()}
+                        />
+                    </ImageBackground>
+
+{/*************************************** Title  ******************************************/}
+
                     <View style={styles.container} >
                         <TextInput style={styles.title} placeholder="Add Title" ></TextInput>
                     </View>
+
+
+{/*************************************** To and From  ******************************************/}
+
                     <View style={styles.pickers} >
                         <StyledPicker width={250} title="To" options={options} />
                     </View>
                     <View style={styles.pickers} >
                         <StyledPicker width={250} title="From" options={options} />
                     </View>
+
+
+{/*************************************** Description  ******************************************/}
+
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Description</Text>
                     </View>
@@ -152,6 +61,10 @@ const AddTrip = ({visible,close})=>{
                             multiline 
                             placeholder="Add Description of Trip" />
                     </View>
+
+
+{/*************************************** Start and End Date  **************************************/}
+
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Start Date - End Date</Text>
                     </View>
@@ -160,18 +73,29 @@ const AddTrip = ({visible,close})=>{
                         <Text style={{paddingHorizontal:17}} >-</Text>
                         <StyledDatePicker/>
                     </View>
+
+
+{/*************************************** Price ******************************************/}
+
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Price</Text>
                     </View>
                     <View style={styles.pickers} >
                         <StyledTextInput width={150} placeholder="Price in Rupees" keyboardType="numeric" maxLength={6} />
                     </View>
+
+
+{/*************************************** Discount  ******************************************/}
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Discount (%) </Text>
                     </View>
                     <View style={styles.pickers} >
                         <StyledTextInput width={150} placeholder="Discount in %" keyboardType="numeric" maxLength={2} />
                     </View>
+
+
+{/*************************************** Food  ******************************************/}
+
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Food </Text>
                     </View>
@@ -189,6 +113,9 @@ const AddTrip = ({visible,close})=>{
                             <Text style={styles.text} >Dinner</Text>
                         </View>
                         
+
+{/*************************************** Accomodation  ******************************************/}
+
                     </View>
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Accomodation </Text>
@@ -200,6 +127,10 @@ const AddTrip = ({visible,close})=>{
                             placeholder="Add Accomodation Details; hotel name etc" />
                     </View>
 
+
+{/*************************************** Conveyance  ******************************************/}
+
+
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Conveyance </Text>
                     </View>
@@ -210,12 +141,21 @@ const AddTrip = ({visible,close})=>{
                             placeholder="Add Conveyance Details" />
                     </View>
 
+
+
+{/*************************************** Gender Spec  ******************************************/}
+
+
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Gender Specification </Text>
                     </View>
                     <View style={styles.pickers} >
                         <StyledPicker width={250} title="Gender" options={options} />
                     </View>
+
+
+
+{/*************************************** Pickup Point  ******************************************/}
 
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Pickup point </Text>
@@ -226,6 +166,10 @@ const AddTrip = ({visible,close})=>{
                             multiline 
                             placeholder="Add Pickup Details" />
                     </View>
+
+
+
+{/*************************************** Schedule  ******************************************/}
 
                     <View style={styles.headingContainer} >
                         <Text style={styles.heading} >Schedule </Text>
@@ -243,6 +187,10 @@ const AddTrip = ({visible,close})=>{
                             <Text style={{fontSize:15,color:"#A7A5A5"}} >Add Schedule</Text>
                         </TouchableOpacity>
                     </View>
+
+
+
+{/*************************************** Add trip ******************************************/}
 
                    <View style={{paddingVertical:100}} >
                         <StyledButton 
