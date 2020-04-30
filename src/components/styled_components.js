@@ -1,9 +1,70 @@
-import React from 'react'
-import {ToastAndroid,TouchableOpacity,TextInput,Text, View,} from 'react-native'
+import React,{useState} from 'react'
+import {ToastAndroid,TouchableOpacity,TextInput,Text, View,Button} from 'react-native'
 import {ProgressBarAndroid} from '@react-native-community/progress-bar-android'
 import {store} from '../redux/store'
 import  Icon  from 'react-native-vector-icons/Ionicons'
 import {Picker} from '@react-native-community/picker'
+import DateTimePicker from '@react-native-community/datetimepicker'
+
+
+const StyledTimePicker = ({changeDate})=>{
+
+}
+
+const formatDate = (_date)=>{
+    const day = _date.getDate()
+    const month = _date.getMonth()
+    const year = _date.getFullYear()
+    const formatedDate = `${day}/${month}/${year}`
+    return formatedDate
+}
+
+const StyledDatePicker = ({onChangeDate})=>{
+    const [date, setDate] = useState(new Date());
+    const [readableDate,setReadableDate] = useState(formatDate(date))
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        //console.log(selectedDate)
+        setShow(false)
+        if(selectedDate !== undefined){
+            setDate(selectedDate)
+            setReadableDate(formatDate(selectedDate))
+            onChangeDate?onChangeDate(selectedDate):{}
+        }
+    };
+    const showDatepicker = ()=>{
+        //console.log(show)
+        setShow(true)
+    }
+
+  return(
+    <View>
+    <View>
+      <TouchableOpacity style={{
+          borderWidth:1,
+          width:135,
+          height:40,
+          alignItems:"center",
+          justifyContent:"center",
+          borderRadius:10,
+          borderColor:"#A7A5A5"
+      }} onPress={showDatepicker} >
+          <Text style={{fontSize:15,color:"#A7A5A5"}} >{readableDate}</Text>
+      </TouchableOpacity>
+    </View>
+    {show && (
+      <DateTimePicker
+        value={date}
+        mode='date'
+        display="default"
+        onChange={onChange}
+      />
+    )}
+  </View>
+  )
+
+}
 
 
 const organizerTheme = {
@@ -95,7 +156,7 @@ const StyledButton = ({roundEdged,rounded,flat,width,fontSize,height,backgroundC
 }
 
 
-const StyledTextInput = ({width,height,password,isValid,placeholder,onChangeText})=>{
+const StyledTextInput = ({width,height,password,isValid,placeholder,onChangeText,keyboardType,maxLength})=>{
     
     const [showPassword,setPasswordVisibility] = React.useState(!password) 
 
@@ -111,6 +172,8 @@ const StyledTextInput = ({width,height,password,isValid,placeholder,onChangeText
             alignItems:"center"
         }} >
             <TextInput 
+                maxLength={maxLength?maxLength:100}
+                keyboardType={keyboardType?keyboardType:"default"}
                 secureTextEntry={!showPassword} 
                 style={{
                     fontSize:16,
@@ -167,11 +230,11 @@ const CustomePicker = (props)=>{
     const [selectedValue,setSelectedValue] = React.useState("Not Specified")
     return(
       <Picker
-          mode="dropdown"
+          mode="modal"
           selectedValue={selectedValue}
           style={{ height: 50, width: 160 }}
           onValueChange={(itemValue, itemIndex) => {
-            props.select(itemValue)
+            props.select?props.select(itemValue):{}
             setSelectedValue(itemValue)
           }}
           
@@ -211,4 +274,4 @@ const StyledPicker = ({width,options,select,title})=>{
     )
 }  
 
-export {Toast,StyledButton,StyledTextInput,StyledPicker,OTPInput}
+export {Toast,StyledButton,StyledTextInput,StyledPicker,OTPInput,StyledDatePicker}

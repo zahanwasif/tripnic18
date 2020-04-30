@@ -10,6 +10,8 @@ const AuthInitialState = {
 
 
 
+
+
 const authReducer = (state = AuthInitialState, action) => {
   if(action.type === "NewUserCreated"){
     return{...state,userProfile:action.userProfile}
