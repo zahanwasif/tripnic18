@@ -7,19 +7,69 @@ import {StyledDatePicker,StyledPicker,StyledTextInput, StyledButton} from '../..
 import CheckBox from '@react-native-community/checkbox';
 
 
-const AddTrip = ({visible,close})=>{
-    
-    const [options,setOptions] = React.useState([
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        "lahore",
-        "Karachi",
-        "Islamabad",
-        
-    ])
-    return(
-            <Modal visible={visible} animated animationType="fade" onRequestClose={()=>{close()}} > 
+class AddTrip extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            title:"",
+            to:"",
+            from:"",
+            description:"",
+            start_date:"",
+            end_date:"",
+            price:0,
+            discount:0,
+            food:{
+                breakfast:false,
+                lunch:false,
+                dinner:false
+            },
+            gender:"Not specified",
+            pickup:"",
+            accomodation:"",
+            conveyance:"",
+            schedule:{},
+            genderOption:[
+                "Not specified",
+                "Male",
+                "Female",
+                "Other"
+            ],
+            toOptions:[
+                "lahore",
+                "Karachi"
+            ],
+            fromOptions:[
+                "lahore",
+                "Karachi"
+            ]
+        }
+    }
+
+    selectTo = (to)=>{
+        console.log(to)
+        this.setState({to:to})
+    }
+
+    selectFrom = (from)=>{
+        this.setState({from:from})
+    }
+
+    selectGender = (gender)=>{
+        this.setState({gender:gender})
+    }
+
+    selectStartDate = (date)=>{
+        this.setState({start_date:date.getTime()})
+    }
+
+    selectEndDate = (date)=>{
+        this.setState({end_date:date.getTime()})
+    }
+
+    render(){
+        return(
+            <Modal visible={this.props.visible} animated animationType="fade" onRequestClose={()=>{this.props.close()}} > 
                 
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{alignItems:"center",justifyContent:"flex-start"}} >    
                     
@@ -29,7 +79,7 @@ const AddTrip = ({visible,close})=>{
                             name="ios-close-circle" 
                             size={30} 
                             color="white" 
-                            onPress={()=>close()}
+                            onPress={()=>this.props.close()}
                         />
                     </ImageBackground>
 
@@ -43,10 +93,10 @@ const AddTrip = ({visible,close})=>{
 {/*************************************** To and From  ******************************************/}
 
                     <View style={styles.pickers} >
-                        <StyledPicker width={250} title="To" options={options} />
+                        <StyledPicker width={250} title="To" select={this.selectTo} options={this.state.toOptions} />
                     </View>
                     <View style={styles.pickers} >
-                        <StyledPicker width={250} title="From" options={options} />
+                        <StyledPicker width={250} title="From" select={this.selectFrom} options={this.state.fromOptions} />
                     </View>
 
 
@@ -69,9 +119,9 @@ const AddTrip = ({visible,close})=>{
                         <Text style={styles.heading} >Start Date - End Date</Text>
                     </View>
                     <View style={styles.pickers} >
-                        <StyledDatePicker/>
+                        <StyledDatePicker onChangeDate={this.selectStartDate} />
                         <Text style={{paddingHorizontal:17}} >-</Text>
-                        <StyledDatePicker/>
+                        <StyledDatePicker onChangeDate={this.selectEndDate} />
                     </View>
 
 
@@ -101,15 +151,27 @@ const AddTrip = ({visible,close})=>{
                     </View>
                     <View style={styles.checkBox} >
                         <View style={{flexDirection:"row",alignItems:"center"}} >
-                            <CheckBox value={true} />
+                            <CheckBox value={this.state.food.breakfast} 
+                                 onValueChange = {(new_val)=>{
+                                    this.setState({food:{...this.state.food,breakfast:new_val}})
+                                }}
+                            />
                             <Text style={styles.text} >Breakfast</Text>
                         </View>
                         <View style={{flexDirection:"row",alignItems:"center"}} >
-                            <CheckBox value={true} />
+                            <CheckBox value={this.state.food.lunch} 
+                                 onValueChange = {(new_val)=>{
+                                    this.setState({food:{...this.state.food,lunch:new_val}})
+                                }}
+                            />
                             <Text style={styles.text} >Lunch</Text>
                         </View>
                         <View style={{flexDirection:"row" ,alignItems:"center"}} >
-                            <CheckBox value={true} />
+                            <CheckBox value={this.state.food.dinner} 
+                                onValueChange = {(new_val)=>{
+                                    this.setState({food:{...this.state.food,dinner:new_val}})
+                                }}
+                            />
                             <Text style={styles.text} >Dinner</Text>
                         </View>
                         
@@ -150,7 +212,7 @@ const AddTrip = ({visible,close})=>{
                         <Text style={styles.heading} >Gender Specification </Text>
                     </View>
                     <View style={styles.pickers} >
-                        <StyledPicker width={250} title="Gender" options={options} />
+                        <StyledPicker width={250} title="Gender" select={this.selectGender} options={this.state.genderOption} />
                     </View>
 
 
@@ -199,6 +261,9 @@ const AddTrip = ({visible,close})=>{
                             fontSize={20}
                             height={50}
                             width={150}
+                            onPress={()=>{
+                                console.log(this.state)
+                            }}
                             />
                    </View>
 
@@ -206,6 +271,7 @@ const AddTrip = ({visible,close})=>{
             </Modal>
         )
 
+    }
 } 
 
 
