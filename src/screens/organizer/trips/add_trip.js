@@ -69,6 +69,7 @@ class AddTrip extends React.Component {
 
     render(){
         return(
+            
             <Modal visible={this.props.visible} animated animationType="fade" onRequestClose={()=>{this.props.close()}} > 
                 
                 <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{alignItems:"center",justifyContent:"flex-start"}} >    
