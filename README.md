@@ -15,4 +15,3 @@ Check complete Enviroment Setup guide on [Official Link]
 1. `npm install` or `yarn`
 2. `npm run sync`
 3. `npx react-native run-android`
-   lol
